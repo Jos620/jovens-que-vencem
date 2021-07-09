@@ -6,6 +6,14 @@ export default {
 	target: 'static',
 
 	/**
+	 * Global CSS
+	 */
+
+	css: [
+		'~/assets/css/variables.css'
+	],
+
+	/**
 	 * Auto import components
 	 */
 	components: {

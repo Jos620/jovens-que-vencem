@@ -1,0 +1,202 @@
+/* 
+---------------------
+---- Box sizing ---- | 
+---------------------
+*/
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* 
+------------------
+---- Padding ---- | 
+------------------
+*/
+
+ul[class],
+ol[class] {
+	padding: 0;
+}
+
+/* 
+-----------------
+---- Margin ---- | 
+-----------------
+*/
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* 
+--------------------
+---- Core Root ---- | 
+--------------------
+*/
+
+html {
+	/* Remove mobile bluish color on tap */
+	-webkit-tap-highlight-color: transparent;
+	scroll-behavior: smooth;
+}
+
+/* 
+--------------------
+---- Core Body ---- | 
+--------------------
+*/
+
+body {
+	text-rendering: optimizeSpeed;
+	margin: var(--header-height) 0 0 0;
+	font-family: var(--body-font);
+	font-size: var(--normal-font-size);
+	background-color: var(--body-color);
+	color: var(--text-color);
+	transition: all 0.125s;
+}
+
+h1,
+h2,
+h3 {
+	color: var(--title-color);
+	font-family: var(--title-font);
+	font-weight: var(--font-semi-bold);
+}
+
+/* 
+---------------------
+---- List Style ---- | 
+---------------------
+*/
+
+ul[class],
+ol[class] {
+	list-style: none;
+}
+
+/* 
+--------------------------
+---- Text Decoration ---- | 
+--------------------------
+*/
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+a[class] {
+	color: var(--text-color);
+}
+
+/* 
+----------------------------
+---- Make images ---------- |
+---- and videos easier ---- |  
+---- to work with --------- | 
+----------------------------
+*/
+
+img,
+video {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* 
+-----------------------------
+---- Inputs and Buttons ---- |
+-----------------------------
+*/
+
+input,
+button {
+	border: none;
+	font-family: var(--body-font);
+	font-size: var(--normal-font-size);
+}
+
+button {
+	cursor: pointer;
+}
+
+input {
+	outline: none;
+}
+
+/* 
+--------------------------
+---- Images without ----- |
+---- alt get blurred ---- | 
+--------------------------
+*/
+
+img:not([alt]) {
+	filter: blur(10px);
+}
+
+/*
+---------------------
+---- Scroll Bar ---- |
+---------------------
+*/
+
+::-webkit-scrollbar {
+	width: 0.6rem;
+	background-color: var(--scroll-bar-color);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--scroll-thumb-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--text-color-light);
+}
+
+/* Medium Screens */
+@media screen and (min-width: 768px) {
+	body {
+		margin: 0;
+	}
+}
+
+/* Tall Screens */
+@media screen and (min-height: 721px) {
+	body {
+		margin: 0;
+	}
+}
+
+/* 
+--------------------------------
+---- Remove all animations ---- |
+---- and transitions for ------ |
+---- people that prefer ------- |
+---- not to see them ---------- |
+--------------------------------
+*/
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
