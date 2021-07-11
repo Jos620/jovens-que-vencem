@@ -101,6 +101,7 @@ a:not([class]) {
 
 a[class] {
 	color: var(--text-color);
+	text-decoration: none;
 }
 
 /* 
