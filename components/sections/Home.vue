@@ -10,10 +10,13 @@
 		<div class="home__container container grid">
 			<!-- Home Data -->
 			<div class="home__data">
-				<span v-if="blok.preTitle" class="home__data-subtitle">
+				<span v-if="blok.preTitle" class="home__data-pretitle">
 					{{ blok.preTitle }}
 				</span>
-				<h1 class="home__data-title">
+				<h1
+					class="home__data-title"
+					:class="{ 'has-subtitle': blok.subTitle }"
+				>
 					<rich-text-renderer :document="blok.title" />
 				</h1>
 				<span v-if="blok.subTitle" class="home__data-subtitle">
@@ -79,12 +82,13 @@ export default {
 	row-gap: 3rem;
 }
 
+.home__data-pretitle,
 .home__data-subtitle,
 .home__data-title {
 	color: var(--white-color);
 }
 
-.home__data-subtitle {
+.home__data-pretitle {
 	display: block;
 	font-weight: var(--font-semi-bold);
 	margin-bottom: var(--space-0-75);
@@ -94,6 +98,10 @@ export default {
 	font-size: var(--biggest-font-size);
 	font-weight: var(--font-medium);
 	margin-bottom: var(--space-2-5);
+}
+
+.home__data-title.has-subtitle {
+	margin-bottom: var(--space-1);
 }
 
 /*
