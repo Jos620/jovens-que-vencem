@@ -13,7 +13,9 @@
 						:document="blok.description"
 					></rich-text-renderer>
 				</p>
-				<a :href="blok.link" class="button">Conheça Mais</a>
+				<a :href="blok.link.url" target="_blank" class="button">
+					Conheça Mais
+				</a>
 			</div>
 
 			<!-- About Images -->
@@ -27,6 +29,7 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
+
 export default {
 	props: {
 		blok: {
