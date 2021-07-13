@@ -15,11 +15,15 @@
 						></rich-text-renderer>
 					</p>
 					<a
-						class="verse__reference"
-						target="_blank"
 						:href="blok.link.url"
+						target="_blank"
+						class="
+							button button--flex button--link
+							verse__reference
+						"
 					>
 						{{ blok.reference }}
+						<i class="ri-arrow-right-line"></i>
 					</a>
 				</div>
 			</div>
