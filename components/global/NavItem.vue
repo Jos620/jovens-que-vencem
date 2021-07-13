@@ -66,10 +66,6 @@ export default {
 		color: var(--white-color);
 	}
 
-	.scroll-header .nav__link {
-		color: var(--text-color);
-	}
-
 	.nav__link.nuxt-link-active {
 		color: var(--white-color);
 	}
@@ -81,6 +77,18 @@ export default {
 	.nav__link.nuxt-link-active::after {
 		bottom: -4px;
 		background-color: var(--white-color);
+	}
+
+	.scroll-header .nav__link {
+		color: var(--text-color);
+	}
+
+	.scroll-header .nav__link.nuxt-link-active {
+		color: var(--title-color);
+	}
+
+	.scroll-header .nav__link.nuxt-link-active::after {
+		background-color: var(--title-color);
 	}
 }
 </style>
