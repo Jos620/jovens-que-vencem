@@ -18,9 +18,19 @@ export default {
 	 */
 	components: {
 		dirs: [
-			'~/components'
+			'~/components',
+			'~/components/sections'
 		]
 	},
+
+	/**
+	 * Plugins
+	 */
+
+	plugins: [
+		'~/plugins/composition-api', // required for storyblok-rich-text-renderer
+		'~/plugins/storyblok-rich-text-renderer'
+	],
 
 	/**
 	 * Modules for
