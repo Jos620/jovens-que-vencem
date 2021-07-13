@@ -97,11 +97,12 @@ ol[class] {
 
 a:not([class]) {
 	text-decoration-skip-ink: auto;
+	text-decoration: underline;
 }
 
-a[class] {
-	color: var(--text-color);
+a {
 	text-decoration: none;
+	color: var(--text-color);
 }
 
 /* 
