@@ -68,6 +68,9 @@ export default {
 
 .home__card-img {
 	width: 145px;
+	max-height: 65px;
+	object-fit: cover;
+	object-position: center;
 	transition: var(--img-transition);
 }
 
@@ -104,6 +107,7 @@ export default {
 
 	.home__card-img {
 		width: 240px;
+		max-height: 110px;
 	}
 }
 </style>
