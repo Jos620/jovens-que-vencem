@@ -1,6 +1,7 @@
 <template>
 	<div v-editable="blok">
 		<component v-if="blok.component" :is="blok.component" :blok="blok" />
+		<ScrollUp />
 	</div>
 </template>
 
