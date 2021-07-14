@@ -20,6 +20,7 @@ export default {
 		dirs: [
 			'~/components',
 			'~/components/sections',
+			'~/components/global',
 			'~/components/atoms',
 			'~/components/molecules',
 			'~/components/organisms',
