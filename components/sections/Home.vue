@@ -2,10 +2,14 @@
 	<section id="home" class="home">
 		<!-- Home Background Image -->
 		<img
-			:src="blok.image.filename"
+			v-if="imageUrl()"
+			:src="imageUrl()"
 			:alt="blok.image.alt"
 			class="home__img"
 		/>
+
+		<!-- No Image -->
+		<div v-else class="no-image"></div>
 
 		<div class="home__container container grid">
 			<!-- Home Data -->
@@ -41,14 +45,36 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from '@nuxtjs/composition-api'
+import { useMediaQuery } from '@vueuse/core'
+
+export default defineComponent({
 	props: {
 		blok: {
 			type: Object,
 			required: true
 		}
+	},
+
+	setup(props) {
+		const isLargeScreen = useMediaQuery('(min-width: 568px)')
+
+		const pcImage = props.blok.image.filename
+		const telImage = props.blok.imageTel.filename
+
+		const imageUrl = () => {
+			// don't render if no images
+			if (!pcImage && !telImage) return false
+			// render mobile image if no pc image
+			if (!pcImage && telImage) return telImage
+
+			// choose between mobile and pc image based on isLargeScreen
+			return !isLargeScreen.value && telImage ? telImage : pcImage
+		}
+
+		return { imageUrl }
 	}
-}
+})
 </script>
 
 <style scoped>
@@ -67,6 +93,21 @@ export default {
 	object-fit: cover;
 	object-position: center;
 	filter: brightness(65%);
+}
+
+/*
+-------------------
+---- No Image ---- |
+-------------------
+*/
+
+.no-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: var(--first-color-lighter);
 }
 
 /*
