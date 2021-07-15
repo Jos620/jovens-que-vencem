@@ -3,7 +3,7 @@ export default {
 	/**
 	 * Target
 	 */
-	target: 'static',
+	target: 'server',
 
 	/**
 	 * Global CSS
@@ -51,6 +51,8 @@ export default {
 	 * Modules
 	 */
 	modules: [
+		// Layer 0 for deployment
+		'@layer0/nuxt/module',
 		// Axios for HTTP requests
 		'@nuxtjs/axios',
 		// Storyblok API
