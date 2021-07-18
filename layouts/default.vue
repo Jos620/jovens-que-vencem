@@ -2,6 +2,7 @@
 	<div>
 		<Header />
 		<Nuxt />
+		<ScrollUp />
 	</div>
 </template>
 
