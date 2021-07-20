@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 import useShowModal from '~/composables/useShowModal'
 import useHandleScroll from '~/composables/useHandleScroll'
@@ -62,8 +62,6 @@ export default defineComponent({
 		const { showModal, toggleShow } = useShowModal()
 
 		const { hasScrolled } = useHandleScroll(100)
-
-		onMounted(() => console.log(blok.value))
 
 		return {
 			blok,
