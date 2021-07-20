@@ -24,12 +24,21 @@
 					>
 				</ul>
 
+				<!-- Dark Mode -->
+				<component 
+					v-if="blok.changeTheme[0].component" 
+					:is="blok.changeTheme[0].component" 
+					:dark="blok.changeTheme[0].iconDark"
+					:light="blok.changeTheme[0].iconLight"
+				/>
+
 				<i
 					id="nav-close"
 					class="ri-close-line nav__close"
 					@click="toggleShow"
 				></i>
 			</div>
+
 
 			<!-- Nav Toggle -->
 			<div class="nav__toggle" id="nav-toggle" @click="toggleShow">
@@ -40,7 +49,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted } from '@nuxtjs/composition-api'
 
 import useShowModal from '~/composables/useShowModal'
 import useHandleScroll from '~/composables/useHandleScroll'
@@ -53,6 +62,8 @@ export default defineComponent({
 		const { showModal, toggleShow } = useShowModal()
 
 		const { hasScrolled } = useHandleScroll(100)
+
+		onMounted(() => console.log(blok.value))
 
 		return {
 			blok,

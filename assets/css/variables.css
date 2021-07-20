@@ -117,6 +117,7 @@
 ---- font sizes ------- |
 ------------------------
 */
+
 @media screen and (min-width: 968px) {
 	:root {
 		--h1-font-size: 2.25rem;
@@ -128,4 +129,24 @@
 		--small-font-size: 0.875rem;
 		--smaller-font-size: 0.813rem;
 	}
+}
+
+/*
+--------------------
+---- Dark Mode ---- |
+--------------------
+*/
+
+:root.dark {
+	/* Text */
+	--title-color: hsl(var(--hue-color), 24%, 95%);
+	--text-color: hsl(var(--hue-color), 8%, 75%);
+
+	/* Others */
+	--input-color: hsl(var(--hue-color), 29%, 16%);
+	--body-color: hsl(var(--hue-color), 94%, 5%);
+
+	/* Scroll bar */
+	--scroll-bar-color: hsl(var(--hue-color), 12%, 26%);
+	--scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
 }
