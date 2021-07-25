@@ -1,9 +1,9 @@
 // prettier-ignore
 export default {
 	/**
-	 * Target
+	 * Target - Static (JAM Stack)
 	 */
-	target: 'server',
+	target: 'static',
 
 	/**
 	 * Global CSS
@@ -51,8 +51,6 @@ export default {
 	 * Modules
 	 */
 	modules: [
-		// Layer 0 for deployment
-		'@layer0/nuxt/module',
 		// Axios for HTTP requests
 		'@nuxtjs/axios',
 		// Storyblok API
