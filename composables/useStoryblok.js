@@ -21,7 +21,7 @@ export default function useStoryblok(path) {
 		})
 
 		// Update bloks value to the response
-		blok.value = query.data.story.content
+		blok.value = query.data
 	})
 
 	return { blok }

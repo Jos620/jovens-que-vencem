@@ -6,7 +6,9 @@
 	>
 		<nav class="nav container">
 			<!-- Nav Logo -->
-			<NLink to="/" class="nav__logo">{{ blok.logo }}</NLink>
+			<NLink to="/" class="nav__logo">{{
+				blok.story.content.logo
+			}}</NLink>
 
 			<!-- Nav Menu -->
 			<div
@@ -16,7 +18,7 @@
 			>
 				<ul class="nav__list">
 					<NavItem
-						v-for="navItem in blok.navbar"
+						v-for="navItem in blok.story.content.navbar"
 						:key="navItem._uid"
 						:link="navItem.link"
 						@click.native="toggleShow"
@@ -25,11 +27,11 @@
 				</ul>
 
 				<!-- Dark Mode -->
-				<component 
-					v-if="blok.changeTheme[0].component" 
-					:is="blok.changeTheme[0].component" 
-					:dark="blok.changeTheme[0].iconDark"
-					:light="blok.changeTheme[0].iconLight"
+				<component
+					v-if="blok.story.content.changeTheme[0].component"
+					:is="blok.story.content.changeTheme[0].component"
+					:dark="blok.story.content.changeTheme[0].iconDark"
+					:light="blok.story.content.changeTheme[0].iconLight"
 				/>
 
 				<i
@@ -38,7 +40,6 @@
 					@click="toggleShow"
 				></i>
 			</div>
-
 
 			<!-- Nav Toggle -->
 			<div class="nav__toggle" id="nav-toggle" @click="toggleShow">

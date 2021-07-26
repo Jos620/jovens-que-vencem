@@ -1,5 +1,5 @@
 <template>
-	<section id="home" class="home">
+	<section v-editable="blok" id="home" class="home">
 		<!-- Home Background Image -->
 		<img
 			v-if="imageUrl()"

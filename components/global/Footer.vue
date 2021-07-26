@@ -3,28 +3,30 @@
 		<div class="footer__container container grid">
 			<div class="footer__content grid">
 				<div class="footer__data">
-                    <NLink to="/">
-                        <h3 class="footer__title">
-                            {{ blok.logo }}
-                        </h3>
-                    </NLink>
+					<NLink to="/">
+						<h3 class="footer__title">
+							{{ blok.story.content.logo }}
+						</h3>
+					</NLink>
 					<p class="footer__description">
-						<rich-text-renderer :document="blok.description"></rich-text-renderer>
+						<rich-text-renderer
+							:document="blok.story.content.description"
+						></rich-text-renderer>
 					</p>
 
 					<div>
-						<SocialLink 
-                            class="footer__social" 
-                            v-for="socialLink in blok.social" 
-                            :key="socialLink._uid" 
-                            :link="socialLink.link.url" 
-                            :icon="socialLink.icon" 
-                        />
+						<SocialLink
+							class="footer__social"
+							v-for="socialLink in blok.story.content.social"
+							:key="socialLink._uid"
+							:link="socialLink.link.url"
+							:icon="socialLink.icon"
+						/>
 					</div>
 				</div>
 
 				<FooterList
-					v-for="footerList in blok.footerLists"
+					v-for="footerList in blok.story.content.footerLists"
 					:key="footerList._uid"
 					:title="footerList.title"
 					:list="footerList.list"
@@ -32,7 +34,10 @@
 			</div>
 
 			<div class="footer__rights">
-				<p class="footer__copy">&#169; {{ year }} JQV - Campo Largo. Todos os direitos reservados.</p>
+				<p class="footer__copy">
+					&#169; {{ year }} JQV - Campo Largo. Todos os direitos
+					reservados.
+				</p>
 			</div>
 		</div>
 	</footer>
@@ -45,12 +50,12 @@ import useStoryblok from '~/composables/useStoryblok'
 
 export default {
 	setup() {
-        const { blok } = useStoryblok('components/footer')
+		const { blok } = useStoryblok('components/footer')
 
-        const now = useNow()
-        const year = now.value.getFullYear()
+		const now = useNow()
+		const year = now.value.getFullYear()
 
-        return { blok, year }
+		return { blok, year }
 	}
 }
 </script>

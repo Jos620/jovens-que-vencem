@@ -1,5 +1,5 @@
 <template>
-	<section id="family" class="family section">
+	<section v-editable="blok" id="family" class="family section">
 		<div class="family__container container grid">
 			<!-- Family Data -->
 			<div class="family__data">

@@ -1,5 +1,5 @@
 <template>
-	<section id="verse" class="verse section">
+	<section v-editable="blok" id="verse" class="verse section">
 		<img class="verse__image" :src="blok.image.filename" alt="Verse" />
 		<div v-if="blok.image.filename" class="verse__container container grid">
 			<div class="verse__data">

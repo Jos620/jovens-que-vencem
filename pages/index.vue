@@ -1,6 +1,11 @@
 <template>
-	<div v-editable="blok">
-		<component v-if="blok.component" :is="blok.component" :blok="blok" />
+	<div>
+		<component
+			v-if="blok.story.content.component"
+			:key="blok.story.content._uid"
+			:is="blok.story.content.component"
+			:blok="blok.story.content"
+		/>
 	</div>
 </template>
 
