@@ -141,6 +141,17 @@ input {
 	outline: none;
 }
 
+/* remove arrows of number inputs */
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
 /* 
 --------------------------
 ---- Images without ----- |

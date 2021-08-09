@@ -33,7 +33,8 @@ export default {
 
 	plugins: [
 		'~/plugins/composition-api', // required for storyblok-rich-text-renderer
-		'~/plugins/storyblok-rich-text-renderer'
+		'~/plugins/storyblok-rich-text-renderer', // rich text renderer
+		'~/plugins/email.js'
 	],
 
 	/**
@@ -61,5 +62,12 @@ export default {
 				cacheProvider: 'memory'
 			}
 		]
-	]
+	],
+
+	/**
+	 * Env variables
+	 */
+	env: {
+		emailUserId: process.env.EMAILJS_USER_ID
+	}
 }
