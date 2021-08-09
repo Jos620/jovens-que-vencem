@@ -12,9 +12,11 @@ import useValidateTelephone from './useValidateTelephone'
 export default function useSubmitTelephone(tel: Ref<string>) {
 	const { isValid } = useValidateTelephone(tel)
 
+	const userId = process.env.emailUserId
+
 	const submit = () => {
 		// send email with EmailJS
-		emailjs.send('gmail', 'jovem-novo', { number: tel.value })
+		emailjs.send('gmail', 'jovem-novo', { number: tel.value }, userId)
 		alert('Em breve entraremos em contato, fique ligado!')
 	}
 

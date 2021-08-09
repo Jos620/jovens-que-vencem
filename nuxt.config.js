@@ -33,8 +33,7 @@ export default {
 
 	plugins: [
 		'~/plugins/composition-api', // required for storyblok-rich-text-renderer
-		'~/plugins/storyblok-rich-text-renderer', // rich text renderer
-		'~/plugins/email.js'
+		'~/plugins/storyblok-rich-text-renderer' // rich text renderer
 	],
 
 	/**
