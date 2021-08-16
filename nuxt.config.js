@@ -44,7 +44,9 @@ export default {
 		// TypeScript builder
 		'@nuxt/typescript-build',
 		// Composition API
-		'@nuxtjs/composition-api/module'
+		'@nuxtjs/composition-api/module',
+		// Image optimization
+		'@nuxtjs/imagemin'			
 	],
 
 	/**
@@ -68,5 +70,12 @@ export default {
 	 */
 	env: {
 		emailUserId: process.env.EMAILJS_USER_ID
+	},
+
+	/**
+	 * Image optimization
+	 */
+	imagemin: {
+		enableInDev: true		
 	}
 }
