@@ -21,7 +21,7 @@
 					<input
 						type="text"
 						v-model="tel"
-						maxlength="15"
+						maxlength="16"
 						name="telefone"
 						autocomplete="off"
 						class="contact__input"
