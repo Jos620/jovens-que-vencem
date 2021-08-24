@@ -1,49 +1,67 @@
 <template>
-	<section v-editable="blok" id="about" class="about section">
+	<section id="about" class="about section">
 		<div class="about__container container grid">
-			<!-- About Data -->
+			<!--==============================================================| 
+			| About Data                                                      |
+			|===============================================================-->
 			<div class="about__data">
 				<h2 class="section__title about__title">
-					<rich-text-renderer
-						:document="blok.title"
-					></rich-text-renderer>
+					<DatocmsStructuredText :data="iigd.title" />
 				</h2>
-				<p class="about__description">
-					<rich-text-renderer
-						:document="blok.description"
-					></rich-text-renderer>
-				</p>
-				<a :href="blok.link.url" target="_blank" class="button">
+				<div class="about__description">
+					<DatocmsStructuredText :data="iigd.description" />
+				</div>
+				<a :href="iigd.link" target="_blank" class="button">
 					Conheça Mais
 				</a>
 			</div>
 
-			<!-- About Images -->
-			<div v-if="haveImages" class="about__img">
-				<AboutImage :img="blok.imageOne.filename" size="small" />
-				<AboutImage :img="blok.imageTwo.filename" size="large" />
+			<!--==============================================================| 
+			| About Images                                                    |
+			|===============================================================-->
+			<div class="about__img">
+				<AboutImage :src="iigd.imageOne" size="small" />
+				<AboutImage :src="iigd.imageTwo" size="large" />
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
+import gql from 'graphql-tag'
+import imageFields from '~/queries/getImageFields'
 
 export default {
-	props: {
-		blok: {
-			type: Object,
-			required: true
-		}
+	apollo: {
+		iigd: gql`
+			{
+				iigd {
+					title {
+						value
+					}
+					description {
+						value
+					}
+					link
+					imageOne {
+						responsiveImage {
+							...imageFields
+						}
+					}
+					imageTwo {
+						responsiveImage {
+							...imageFields
+						}
+					}
+				}
+			}
+
+			${imageFields}
+		`
 	},
 
-	setup(props) {
-		const haveImages = computed(
-			() => props.blok.imageOne.filename && props.blok.imageTwo.filename
-		)
-
-		return { haveImages }
+	mounted() {
+		console.log(this.iigd)
 	}
 }
 </script>
@@ -61,10 +79,10 @@ export default {
 	margin-bottom: var(--space-2);
 }
 
-/*
------------------
----- Images ---- |
------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Images                                                                      | 
+|-----------------------------------------------------------------------------|
 */
 
 .about__img {
@@ -74,7 +92,12 @@ export default {
 	justify-content: center;
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
 	.about__container {
 		grid-template-columns: repeat(2, 1fr);

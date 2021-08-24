@@ -1,12 +1,12 @@
 <template>
-	<a :href="link" target="_blank" class="social__link">
+	<a :href="href" target="_blank" class="social__link">
 		<i :class="icon"></i>
 	</a>
 </template>
 
 <script>
 export default {
-	props: ['icon', 'link']
+	props: ['icon', 'href']
 }
 </script>
 

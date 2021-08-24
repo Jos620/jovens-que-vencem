@@ -1,12 +1,16 @@
 <template>
 	<div class="about__img-overlay">
-		<img :src="img" alt="About" :class="`about__img--${size}`" />
+		<DatocmsImage
+			:data="src.responsiveImage"
+			:class="`about__img--${size}`"
+			:pictureStyle="{ objectFit: 'cover' }"
+		/>
 	</div>
 </template>
 
 <script>
 export default {
-	props: ['img', 'size']
+	props: ['src', 'size']
 }
 </script>
 
@@ -37,7 +41,12 @@ export default {
 	transform: var(--img-scale);
 }
 
-/* Large Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Large Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 1024px) {
 	.about__img--small {
 		width: 240px;

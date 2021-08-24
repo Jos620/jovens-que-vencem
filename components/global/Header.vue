@@ -5,35 +5,41 @@
 		:class="{ 'scroll-header': hasScrolled }"
 	>
 		<nav class="nav container">
-			<!-- Nav Logo -->
-			<NLink to="/" class="nav__logo">{{
-				blok.story.content.logo
-			}}</NLink>
+			<!--==============================================================|
+			| Logo                                                            |
+			|===============================================================-->
+			<NLink to="/" class="nav__logo">
+				{{ header.logo }}
+			</NLink>
 
-			<!-- Nav Menu -->
+			<!--==============================================================|
+			| Nav Menu                                                        |
+			|===============================================================-->
 			<div
 				id="nav-menu"
 				class="nav__menu"
 				:class="{ 'show-menu': showModal }"
 			>
+				<!--==========================================================|
+				| Navbar                                                      |
+				|===========================================================-->
 				<ul class="nav__list">
 					<NavItem
-						v-for="navItem in blok.story.content.navbar"
-						:key="navItem._uid"
-						:link="navItem.link"
-						@click.native="toggleShow"
-						>{{ navItem.text }}</NavItem
-					>
+						v-for="link in header.navbar"
+						:key="link.id"
+						:href="link.navbarLinkHref"
+						:text="link.navbarLinkText"
+					/>
 				</ul>
 
-				<!-- Dark Mode -->
-				<component
-					v-if="blok.story.content.changeTheme[0].component"
-					:is="blok.story.content.changeTheme[0].component"
-					:dark="blok.story.content.changeTheme[0].iconDark"
-					:light="blok.story.content.changeTheme[0].iconLight"
-				/>
+				<!--==========================================================|
+				| Dark Mode                                                   |
+				|===========================================================-->
+				<ChangeTheme />
 
+				<!--==========================================================|
+				| Close Menu                                                  |
+				|===========================================================-->
 				<i
 					id="nav-close"
 					class="ri-close-line nav__close"
@@ -41,8 +47,10 @@
 				></i>
 			</div>
 
-			<!-- Nav Toggle -->
-			<div class="nav__toggle" id="nav-toggle" @click="toggleShow">
+			<!--==============================================================|
+			| Open Menu                                                       |
+			|===============================================================-->
+			<div class="nav__open" id="nav-open" @click="toggleShow">
 				<i class="ri-function-line"></i>
 			</div>
 		</nav>
@@ -51,21 +59,20 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-
 import useShowModal from '~/composables/useShowModal'
 import useHandleScroll from '~/composables/useHandleScroll'
-import useStoryblok from '~/composables/useStoryblok'
+import getHeader from '~/queries/getHeader'
 
 export default defineComponent({
+	apollo: {
+		header: getHeader
+	},
+
 	setup() {
-		const { blok } = useStoryblok('components/header')
-
 		const { showModal, toggleShow } = useShowModal()
-
 		const { hasScrolled } = useHandleScroll(100)
 
 		return {
-			blok,
 			showModal,
 			toggleShow,
 			hasScrolled
@@ -75,10 +82,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/*
------------------
----- Header ---- |
------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Header                                                                      | 
+|-----------------------------------------------------------------------------|
 */
 
 .header {
@@ -90,10 +97,10 @@ export default defineComponent({
 	transition: 0.125s;
 }
 
-/*
---------------
----- Nav ---- |
---------------
+/* 
+|-----------------------------------------------------------------------------|
+| Nav                                                                         | 
+|-----------------------------------------------------------------------------|
 */
 
 .nav {
@@ -104,7 +111,7 @@ export default defineComponent({
 }
 
 .nav__logo,
-.nav__toggle {
+.nav__open {
 	color: var(--white-color);
 }
 
@@ -113,7 +120,7 @@ export default defineComponent({
 	font-size: var(--h1-font-size);
 }
 
-.nav__toggle {
+.nav__open {
 	font-size: 1.2rem;
 	cursor: pointer;
 }
@@ -121,6 +128,12 @@ export default defineComponent({
 .nav__menu {
 	position: relative;
 }
+
+/* 
+|-----------------------------------------------------------------------------|
+| Small Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
 
 @media screen and (max-width: 767px) {
 	.nav__menu {
@@ -151,21 +164,20 @@ export default defineComponent({
 	cursor: pointer;
 }
 
-/*
---------------------
----- Show Menu ---- |
---------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Show Menu                                                                   | 
+|-----------------------------------------------------------------------------|
 */
 
 .show-menu {
 	right: 0;
 }
 
-/*
-----------------------------
----- Change background ---- |
----- color ---------------- |
-----------------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Change Background Color                                                     | 
+|-----------------------------------------------------------------------------|
 */
 
 .scroll-header {
@@ -174,11 +186,16 @@ export default defineComponent({
 }
 
 .scroll-header .nav__logo,
-.scroll-header .nav__toggle {
+.scroll-header .nav__open {
 	color: var(--title-color);
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
 	.nav {
 		height: calc(var(--header-height) + 1.5rem);
@@ -195,7 +212,7 @@ export default defineComponent({
 		margin-right: 4rem;
 	}
 
-	.nav__toggle,
+	.nav__open,
 	.nav__close {
 		display: none;
 	}

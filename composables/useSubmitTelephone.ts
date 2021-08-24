@@ -1,7 +1,6 @@
 import { Ref } from '@vue/composition-api'
 import { set } from '@vueuse/core'
 import emailjs from 'emailjs-com'
-
 import useValidateTelephone from './useValidateTelephone'
 
 /**
@@ -12,7 +11,7 @@ import useValidateTelephone from './useValidateTelephone'
 export default function useSubmitTelephone(tel: Ref<string>) {
 	const { isValid } = useValidateTelephone(tel)
 
-	const userId = process.env.emailUserId
+	const userId = process.env.EMAILJS_USER_ID
 
 	const submit = () => {
 		// send email with EmailJS

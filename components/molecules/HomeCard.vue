@@ -1,9 +1,9 @@
 <template>
 	<div class="home__card">
 		<div>
-			<span class="home__card-title">{{ blok.title }}</span>
+			<span class="home__card-title">{{ homeCard.homeCardTitle }}</span>
 			<a
-				:href="blok.link"
+				:href="homeCard.homeCardLink"
 				target="_blank"
 				class="button button--flex button--link home__card-button"
 			>
@@ -13,22 +13,21 @@
 		</div>
 
 		<div class="home__card-overlay">
-			<img
-				:src="blok.image.filename"
-				:alt="blok.image.alt"
+			<DatocmsImage
+				:data="homeCard.homeCardThumbnail.responsiveImage"
 				class="home__card-img"
+				:pictureStyle="{ objectFit: 'cover' }"
 			/>
 		</div>
 	</div>
 </template>
 
 <script>
+import getHomeCard from '~/queries/getHomeCard'
+
 export default {
-	props: {
-		blok: {
-			type: Object,
-			required: true
-		}
+	apollo: {
+		homeCard: getHomeCard
 	}
 }
 </script>
@@ -78,7 +77,12 @@ export default {
 	transform: var(--img-scale);
 }
 
-/* Small Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Small Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (max-width: 340px) {
 	.home__card {
 		width: 190px;
@@ -86,14 +90,24 @@ export default {
 	}
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
 	.home__card {
 		bottom: 3rem;
 	}
 }
 
-/* Large Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Large Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 1024px) {
 	.home__card {
 		width: 328px;
@@ -107,6 +121,7 @@ export default {
 
 	.home__card-img {
 		width: 240px;
+		height: 110px;
 		max-height: 110px;
 	}
 }

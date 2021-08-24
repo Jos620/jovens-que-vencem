@@ -1,87 +1,98 @@
 <template>
-	<section v-editable="blok" id="home" class="home">
-		<!-- Home Background Image -->
-		<img
-			v-if="imageUrl()"
-			:src="imageUrl()"
-			:alt="blok.image.alt"
+	<section id="home" class="home">
+		<!--==================================================================|
+		| Home Background Image                                               |
+		|===================================================================-->
+		<DatocmsImage
+			v-if="home.image"
 			class="home__img"
+			style="position: absolute"
+			:data="home.image.responsiveImage"
+			:pictureStyle="{ objectFit: 'cover' }"
 		/>
 
-		<!-- No Image -->
+		<!--==================================================================|
+		| No Image                                                            |
+		|===================================================================-->
 		<div v-else class="no-image"></div>
 
 		<div class="home__container container grid">
-			<!-- Home Data -->
+			<!--==============================================================|
+			| Home Data                                                       |
+			|===============================================================-->
 			<div class="home__data">
-				<span v-if="blok.preTitle" class="home__data-pretitle">
-					{{ blok.preTitle }}
+				<span v-if="home.preTitle" class="home__data-pretitle">
+					{{ home.preTitle }}
 				</span>
 				<h1
 					class="home__data-title"
-					:class="{ 'has-subtitle': blok.subTitle }"
+					:class="{ 'has-subtitle': home.subTitle }"
 				>
-					<rich-text-renderer :document="blok.title" />
+					<DatocmsStructuredText :data="home.title" />
 				</h1>
-				<span v-if="blok.subTitle" class="home__data-subtitle">
-					{{ blok.subTitle }}
+				<span v-if="home.subTitle" class="home__data-subtitle">
+					{{ home.subTitle }}
 				</span>
 			</div>
 
-			<!-- Home Social -->
+			<!--==============================================================|
+			| Home Social                                                     |
+			|===============================================================-->
 			<div class="home__social">
 				<SocialLink
-					v-for="socialLink in blok.social"
-					:key="socialLink._uid"
-					:icon="socialLink.icon"
-					:link="socialLink.link.url"
+					v-for="social in home.social"
+					:key="social.id"
+					:icon="social.icon"
+					:href="social.link"
 				/>
 			</div>
 
-			<!-- Home Card -->
-			<HomeCard :blok="blok.card[0]" />
+			<!--==============================================================|
+			| Home Card                                                       |
+			|===============================================================-->
+			<HomeCard />
 		</div>
 	</section>
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
-import { useMediaQuery } from '@vueuse/core'
+import gql from 'graphql-tag'
+import imageFields from '~/queries/getImageFields'
 
-export default defineComponent({
-	props: {
-		blok: {
-			type: Object,
-			required: true
-		}
-	},
+export default {
+	apollo: {
+		home: gql`
+			{
+				home {
+					image {
+						responsiveImage {
+							...imageFields
+						}
+					}
+					title {
+						value
+					}
+					preTitle
+					subTitle
+					social {
+						id
+						icon
+						link
+					}
+				}
+			}
 
-	setup(props) {
-		const isLargeScreen = useMediaQuery('(min-width: 568px)')
-
-		const pcImage = props.blok.image.filename
-		const telImage = props.blok.imageTel.filename
-
-		const imageUrl = () => {
-			// don't render if no images
-			if (!pcImage && !telImage) return false
-			// render mobile image if no pc image
-			if (!pcImage && telImage) return telImage
-
-			// choose between mobile and pc image based on isLargeScreen
-			return !isLargeScreen.value && telImage ? telImage : pcImage
-		}
-
-		return { imageUrl }
+			${imageFields}
+		`
 	}
-})
+}
 </script>
 
 <style scoped>
-/*
----------------------------
----- Background Image ---- |
----------------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Background Image                                                            | 
+|-----------------------------------------------------------------------------|
 */
 
 .home__img {
@@ -90,15 +101,13 @@ export default defineComponent({
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	object-fit: cover;
-	object-position: center;
 	filter: brightness(65%);
 }
 
-/*
--------------------
----- No Image ---- |
--------------------
+/* 
+|-----------------------------------------------------------------------------|
+| No Image                                                                    | 
+|-----------------------------------------------------------------------------|
 */
 
 .no-image {
@@ -107,13 +116,13 @@ export default defineComponent({
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	background-color: var(--first-color-lighter);
+	background-color: var(--first-color);
 }
 
-/*
-------------------
----- Content ---- |
-------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Content                                                                     | 
+|-----------------------------------------------------------------------------|
 */
 
 .home__container {
@@ -145,10 +154,10 @@ export default defineComponent({
 	margin-bottom: var(--space-1);
 }
 
-/*
-------------------------
----- Social Medias ---- |
-------------------------
+/* 
+|-----------------------------------------------------------------------------|
+| Social Media                                                                | 
+|-----------------------------------------------------------------------------|
 */
 
 .home__social {
@@ -157,7 +166,12 @@ export default defineComponent({
 	row-gap: 1.5rem;
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
 	.home__container {
 		height: 100vh;
@@ -176,7 +190,12 @@ export default defineComponent({
 	}
 }
 
-/* Large Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Large Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 1024px) {
 	.home__img {
 		object-position: 83%;
@@ -187,10 +206,16 @@ export default defineComponent({
 	}
 }
 
-/* Tall Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Tall Screens                                                                | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-height: 721px) {
 	.home__container,
-	.home__img {
+	.home__img,
+	.no-image {
 		height: 720px;
 	}
 }

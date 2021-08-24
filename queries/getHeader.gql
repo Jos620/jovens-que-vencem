@@ -1,0 +1,10 @@
+{
+	header {
+		logo
+		navbar {
+			id
+			navbarLinkHref
+			navbarLinkText
+		}
+	}
+}

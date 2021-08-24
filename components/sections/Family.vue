@@ -1,36 +1,60 @@
 <template>
-	<section v-editable="blok" id="family" class="family section">
+	<section id="family" class="family section">
 		<div class="family__container container grid">
-			<!-- Family Data -->
+			<!--==============================================================| 
+            | Family Data                                                     |
+            |===============================================================-->
 			<div class="family__data">
 				<h2 class="section__title family__title">
-					<rich-text-renderer
-						:document="blok.title"
-					></rich-text-renderer>
+					<DatocmsStructuredText :data="family.title" />
 				</h2>
-				<p class="family__description">
-					<rich-text-renderer
-						:document="blok.description"
-					></rich-text-renderer>
-				</p>
+				<DatocmsStructuredText
+					:data="family.description"
+					class="family__description"
+				/>
 			</div>
 
-			<!-- Family Images -->
+			<!--==============================================================| 
+            | Family Images                                                   |
+            |===============================================================-->
 			<div class="family__image">
-				<FamilyImage :img="blok.imageOne.filename" name="one" />
-				<FamilyImage :img="blok.imageTwo.filename" name="two" />
+				<FamilyImage :src="family.imageOne" name="one" />
+				<FamilyImage :src="family.imageTwo" name="two" />
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
+import gql from 'graphql-tag'
+import imageFields from '~/queries/getImageFields'
+
 export default {
-	props: {
-		blok: {
-			type: Object,
-			required: true
-		}
+	apollo: {
+		family: gql`
+			{
+				family {
+					title {
+						value
+					}
+					description {
+						value
+					}
+					imageOne {
+						responsiveImage {
+							...imageFields
+						}
+					}
+					imageTwo {
+						responsiveImage {
+							...imageFields
+						}
+					}
+				}
+			}
+
+			${imageFields}
+		`
 	}
 }
 </script>
@@ -47,7 +71,12 @@ export default {
 	padding-bottom: 2rem;
 }
 
-/* Small Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Small Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (max-width: 340px) {
 	.family__container {
 		padding: 0;
@@ -58,7 +87,12 @@ export default {
 	}
 }
 
-/* Large Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Large Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 1024px) {
 	.family__container {
 		margin: var(--space-1) auto var(--space-1);

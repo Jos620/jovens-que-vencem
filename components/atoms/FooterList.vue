@@ -4,7 +4,7 @@
 
 		<ul class="footer__list">
 			<li class="footer__item" v-for="(item, i) in list" :key="i">
-				<a :href="item.link.url" class="footer__link">
+				<a :href="item.link" class="footer__link">
 					{{ item.text }}
 				</a>
 			</li>

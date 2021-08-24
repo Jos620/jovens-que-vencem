@@ -2,21 +2,23 @@
 	<section class="contact section" id="contact">
 		<div class="contact__bg">
 			<div class="contact__container container">
-				<!-- Contact Title -->
+				<!--==========================================================| 
+				| Contact Title                                               |
+				|===========================================================-->
 				<h2 class="section__title contact__title">
-					<rich-text-renderer
-						:document="blok.title"
-					></rich-text-renderer>
+					<DatocmsStructuredText :data="contact.title" />
 				</h2>
 
-				<!-- Contact Description -->
-				<p class="contact__description">
-					<rich-text-renderer
-						:document="blok.description"
-					></rich-text-renderer>
-				</p>
+				<!--==========================================================| 
+				| Contact Description                                         |
+				|===========================================================-->
+				<div class="contact__description">
+					<DatocmsStructuredText :data="contact.description" />
+				</div>
 
-				<!-- Contact Form -->
+				<!--==========================================================| 
+				| Contact Form                                                |
+				|===========================================================-->
 				<form class="contact__form" @submit.prevent="submitTel">
 					<input
 						type="text"
@@ -25,7 +27,7 @@
 						name="telefone"
 						autocomplete="off"
 						class="contact__input"
-						:placeholder="blok.placeholder"
+						:placeholder="contact.placeholder"
 					/>
 					<button type="submit" class="button">Enviar</button>
 				</form>
@@ -36,16 +38,25 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-
+import gql from 'graphql-tag'
 import useTelephoneMask from '~/composables/useTelephoneMask'
 import useSubmitTelephone from '~/composables/useSubmitTelephone'
 
 export default defineComponent({
-	props: {
-		blok: {
-			type: Object,
-			required: true
-		}
+	apollo: {
+		contact: gql`
+			{
+				contact {
+					title {
+						value
+					}
+					description {
+						value
+					}
+					placeholder
+				}
+			}
+		`
 	},
 
 	setup() {
@@ -91,7 +102,12 @@ export default defineComponent({
 	color: var(--text-color);
 }
 
-/* Medium Screens */
+/*
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              |
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 568px) {
 	.contact__form {
 		width: 470px;

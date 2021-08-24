@@ -1,0 +1,17 @@
+query HomeCard {
+	homeCard {
+		homeCardTitle
+		homeCardLink
+		homeCardThumbnail {
+			responsiveImage {
+				aspectRatio
+				width
+				sizes
+				srcSet
+				src
+				alt
+				title
+			}
+		}
+	}
+}

@@ -1,18 +1,24 @@
 <template>
 	<li class="nav__item">
-		<NLink :to="link" class="nav__link">
-			<slot></slot>
+		<NLink :to="href" class="nav__link">
+			{{ text }}
 		</NLink>
 	</li>
 </template>
 
 <script>
 export default {
-	props: ['link']
+	props: ['href', 'text']
 }
 </script>
 
 <style scoped>
+/* 
+|-----------------------------------------------------------------------------|
+| Nav Link                                                                    | 
+|-----------------------------------------------------------------------------|
+*/
+
 .nav__link {
 	color: var(--text-color-light);
 	font-weight: var(--font-semi-bold);
@@ -44,7 +50,12 @@ export default {
 	/* TODO: an transition efect to nuxt-link-active::after */
 }
 
-/* Active link enter animation */
+/* 
+|-----------------------------------------------------------------------------|
+| Active enter transition                                                     | 
+|-----------------------------------------------------------------------------|
+*/
+
 @keyframes appear {
 	from {
 		width: 0;
@@ -55,8 +66,19 @@ export default {
 	}
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
+	/* 
+    |-------------------------------------------------------------------------|
+    | Nav Link                                                                | 
+    |-------------------------------------------------------------------------|
+    */
+
 	.nav__link {
 		color: var(--white-color);
 		text-transform: initial;
@@ -78,6 +100,14 @@ export default {
 		bottom: -4px;
 		background-color: var(--white-color);
 	}
+
+	/* 
+    |-------------------------------------------------------------------------|
+    | Nav Link Color                                                          | 
+    |-------------------------------------------------------------------------|
+    | Change link color when the background changes                           | 
+    |-------------------------------------------------------------------------|
+    */
 
 	.scroll-header .nav__link {
 		color: var(--text-color);

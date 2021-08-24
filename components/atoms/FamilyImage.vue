@@ -1,12 +1,16 @@
 <template>
 	<div class="family__overlay">
-		<img :src="img" alt="Family" :class="`family__image-${name}`" />
+		<DatocmsImage
+			:data="src.responsiveImage"
+			:class="`family__image-${name}`"
+			:pictureStyle="{ objectFit: 'cover' }"
+		/>
 	</div>
 </template>
 
 <script>
 export default {
-	props: ['img', 'name']
+	props: ['src', 'name']
 }
 </script>
 
@@ -43,7 +47,12 @@ export default {
 	transform: var(--img-scale);
 }
 
-/* Small Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Small Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (max-width: 340px) {
 	.family__overlay:nth-child(1) {
 		width: 190px;
@@ -56,7 +65,12 @@ export default {
 	}
 }
 
-/* Medium Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Medium Screens                                                              | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 768px) {
 	.family__overlay:nth-child(1) {
 		width: 363px;
@@ -70,7 +84,12 @@ export default {
 	}
 }
 
-/* Large Screens */
+/* 
+|-----------------------------------------------------------------------------|
+| Large Screens                                                               | 
+|-----------------------------------------------------------------------------|
+*/
+
 @media screen and (min-width: 1024px) {
 	.family__overlay:nth-child(1) {
 		width: 463px;
