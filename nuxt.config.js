@@ -18,7 +18,7 @@ export default {
 		 * | Title                                                            |
 		 * |------------------------------------------------------------------|
 		 */
-		title: 'JQV - Campo Largo',
+		title: process.env.SEO_TITLE,
 
 		/**
 		 * |------------------------------------------------------------------|
@@ -33,6 +33,29 @@ export default {
 			{ name: 'msapplication-TileColor', content: '#ffffff'                             },
 			{ name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png'        },
 			{ name: 'theme-color',             content: '#000'                                },
+
+			/**
+			 * |--------------------------------------------------------------|
+			 * | SEO Tags                                                     |
+			 * |--------------------------------------------------------------|
+			 */
+			{ name: 'title',                   content: process.env.SEO_TITLE       },
+			{ name: 'description',             content: process.env.SEO_DESCRIPTION },
+
+			// // Open Graph / Facebook -----------------------------------------|
+			// { property: 'og:type',             content: 'website'                   },
+			// { property: 'og:url',              content: process.env.SEO_PERMALINK   },
+			// { property: 'og:title',            content: process.env.SEO_TITLE       },
+			// { property: 'og:description',      content: process.env.SEO_DESCRIPTION },
+			// { property: 'og:image',            content: process.env.SEO_PREVIEW     },
+
+			// // Twitter -------------------------------------------------------|
+			// { property: 'twitter:card',        content: 'summary_large_image'       },
+			// { property: 'twitter:url',         content: process.env.SEO_PERMALINK   },
+			// { property: 'twitter:title',       content: process.env.SEO_TITLE       },
+			// { property: 'twitter:description', content: process.env.SEO_DESCRIPTION },
+			// { property: 'twitter:image',       content: process.env.SEO_PREVIEW     },
+
 		],
 
 		/**
