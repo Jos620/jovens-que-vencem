@@ -4,13 +4,13 @@
 			<div class="footer__content grid">
 				<div class="footer__data">
 					<NLink to="/">
-						<h3 class="footer__title">Jovens que Vencem</h3>
+						<h3 class="footer__title">
+							<DatocmsStructuredText :data="footer.logo" />
+						</h3>
 					</NLink>
-					<p class="footer__description">
-						Ministério Jovens que Vencem <br />
-						de Campo Largo - Igreja <br />
-						Internacional da Graça de Deus
-					</p>
+					<div class="footer__description">
+						<DatocmsStructuredText :data="footer.description" />
+					</div>
 
 					<div>
 						<SocialLink
@@ -24,7 +24,7 @@
 				</div>
 
 				<FooterList
-					v-for="footerList in footer.lists"
+					v-for="footerList in allFooterLists"
 					:key="footerList.id"
 					:title="footerList.title"
 					:list="footerList.list"
@@ -42,36 +42,52 @@
 </template>
 
 <script>
+import { defineComponent } from '@nuxtjs/composition-api'
 import { useNow } from '@vueuse/core'
+import gql from 'graphql-tag'
 
-export default {
+export default defineComponent({
+	apollo: {
+		footer: gql`
+			{
+				footer {
+					logo {
+						value
+					}
+					description {
+						value
+					}
+					social {
+						id
+						icon
+						link
+					}
+				}
+			}
+		`,
+		allFooterLists: gql`
+			{
+				allFooterLists {
+					id
+					title {
+						value
+					}
+					list {
+						id
+						text
+						link
+					}
+				}
+			}
+		`
+	},
 	setup() {
 		const now = useNow()
 		const year = now.value.getFullYear()
 
-		// prettier-ignore
-		const footer = {
-			social: [
-				{ id: 0, icon: 'ri-facebook-box-fill', link: 'https://www.facebook.com/Jovens-que-Vencem-Campo-Largo-1472750559624132' },
-				{ id: 1, icon: 'ri-instagram-fill',    link: 'https://www.instagram.com/jqvcampolargo'                                 },
-				{ id: 2, icon: 'ri-whatsapp-fill',     link: 'https://api.whatsapp.com/send?phone=554187232092&text=Eae🎸'             },
-			],
-			lists: [
-				{ id: 0, title: 'IIGD', list: [
-					{ text: 'Ongrace',   link: 'https://ongrace.com/portal'                     },
-					{ text: 'Facebook',  link: 'https://pt-br.facebook.com/missionariorrsoares' },
-					{ text: 'Instagram', link: 'https://www.instagram.com/missionariorrsoares'  },
-				]},
-				{ id: 1, title: 'JQV', list: [
-					{ text: 'Facebook',  link: 'https://www.facebook.com/JQVParana'   },
-					{ text: 'Instagram', link: 'https://www.instagram.com/jqvparana/' },
-				]},
-			]
-		}
-
-		return { year, footer }
+		return { year }
 	}
-}
+})
 </script>
 
 <style scoped>
