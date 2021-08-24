@@ -1,9 +1,14 @@
 <template>
 	<div class="home__card">
-		<div>
-			<span class="home__card-title">{{ homeCard.homeCardTitle }}</span>
+		<!--==================================================================| 
+		| Home Card Data                                                      |
+		|===================================================================-->
+		<div class="home__card__data">
+			<span class="home__card-title">
+				<DatocmsStructuredText :data="card.title" />
+			</span>
 			<a
-				:href="homeCard.homeCardLink"
+				:href="card.link"
 				target="_blank"
 				class="button button--flex button--link home__card-button"
 			>
@@ -12,9 +17,12 @@
 			</a>
 		</div>
 
+		<!--==================================================================| 
+		| Home Card Thumbnail                                                 |
+		|===================================================================-->
 		<div class="home__card-overlay">
 			<DatocmsImage
-				:data="homeCard.homeCardThumbnail.responsiveImage"
+				:data="card.thumbnail.responsiveImage"
 				class="home__card-img"
 				:pictureStyle="{ objectFit: 'cover' }"
 			/>
@@ -23,11 +31,28 @@
 </template>
 
 <script>
-import getHomeCard from '~/queries/getHomeCard'
+import gql from 'graphql-tag'
+import imageFields from '~/queries/getImageFields'
 
 export default {
 	apollo: {
-		homeCard: getHomeCard
+		card: gql`
+			{
+				card {
+					title {
+						value
+					}
+					link
+					thumbnail {
+						responsiveImage {
+							...imageFields
+						}
+					}
+				}
+			}
+
+			${imageFields}
+		`
 	}
 }
 </script>
