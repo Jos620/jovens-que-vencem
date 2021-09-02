@@ -1,0 +1,23 @@
+#import './getImageFields.gql'
+
+{
+	iigd {
+		title {
+			value
+		}
+		description {
+			value
+		}
+		link
+		imageOne {
+			responsiveImage {
+				...imageFields
+			}
+		}
+		imageTwo {
+			responsiveImage {
+				...imageFields
+			}
+		}
+	}
+}

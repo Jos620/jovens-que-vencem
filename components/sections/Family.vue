@@ -26,35 +26,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import imageFields from '~/queries/getImageFields'
+import family from '~/graphql/getFamily'
 
 export default {
 	apollo: {
-		family: gql`
-			{
-				family {
-					title {
-						value
-					}
-					description {
-						value
-					}
-					imageOne {
-						responsiveImage {
-							...imageFields
-						}
-					}
-					imageTwo {
-						responsiveImage {
-							...imageFields
-						}
-					}
-				}
-			}
-
-			${imageFields}
-		`
+		family
 	}
 }
 </script>

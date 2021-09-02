@@ -9,22 +9,12 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
+import home from '~/graphql/getGlobalMeta'
 import { toHead } from 'vue-datocms'
 
 export default {
 	apollo: {
-		home: gql`
-			{
-				home {
-					seo: _seoMetaTags {
-						tag
-						content
-						attributes
-					}
-				}
-			}
-		`
+		home
 	},
 
 	head() {

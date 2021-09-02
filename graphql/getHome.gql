@@ -1,0 +1,21 @@
+#import './getImageFields.gql'
+
+{
+	home {
+		image {
+			responsiveImage {
+				...imageFields
+			}
+		}
+		title {
+			value
+		}
+		preTitle
+		subTitle
+		social {
+			id
+			icon
+			link
+		}
+	}
+}

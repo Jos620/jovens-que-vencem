@@ -56,34 +56,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import imageFields from '~/queries/getImageFields'
+import home from '~/graphql/getHome'
 
 export default {
 	apollo: {
-		home: gql`
-			{
-				home {
-					image {
-						responsiveImage {
-							...imageFields
-						}
-					}
-					title {
-						value
-					}
-					preTitle
-					subTitle
-					social {
-						id
-						icon
-						link
-					}
-				}
-			}
-
-			${imageFields}
-		`
+		home
 	}
 }
 </script>

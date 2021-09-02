@@ -1,0 +1,22 @@
+#import './getImageFields'
+
+{
+	family {
+		title {
+			value
+		}
+		description {
+			value
+		}
+		imageOne {
+			responsiveImage {
+				...imageFields
+			}
+		}
+		imageTwo {
+			responsiveImage {
+				...imageFields
+			}
+		}
+	}
+}

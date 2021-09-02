@@ -1,0 +1,15 @@
+#import './getImageFields.gql'
+
+{
+	card {
+		title {
+			value
+		}
+		link
+		thumbnail {
+			responsiveImage {
+				...imageFields
+			}
+		}
+	}
+}

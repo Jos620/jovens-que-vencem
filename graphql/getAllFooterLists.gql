@@ -1,0 +1,13 @@
+{
+	allFooterLists {
+		id
+		title {
+			value
+		}
+		list {
+			id
+			text
+			link
+		}
+	}
+}

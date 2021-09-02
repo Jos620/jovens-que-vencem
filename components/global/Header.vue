@@ -61,7 +61,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import useShowModal from '~/composables/useShowModal'
 import useHandleScroll from '~/composables/useHandleScroll'
-import getHeader from '~/queries/getHeader'
+import getHeader from '~/graphql/getHeader'
 
 export default defineComponent({
 	apollo: {

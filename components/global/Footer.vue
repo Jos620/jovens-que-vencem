@@ -43,47 +43,18 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import { useNow } from '@vueuse/core'
-import gql from 'graphql-tag'
+import { get, useNow } from '@vueuse/core'
+import footer from '~/graphql/getFooter'
+import allFooterLists from '~/graphql/getAllFooterLists'
 
 export default defineComponent({
 	apollo: {
-		footer: gql`
-			{
-				footer {
-					logo {
-						value
-					}
-					description {
-						value
-					}
-					social {
-						id
-						icon
-						link
-					}
-				}
-			}
-		`,
-		allFooterLists: gql`
-			{
-				allFooterLists {
-					id
-					title {
-						value
-					}
-					list {
-						id
-						text
-						link
-					}
-				}
-			}
-		`
+		footer,
+		allFooterLists
 	},
 	setup() {
 		const now = useNow()
-		const year = now.value.getFullYear()
+		const year = get(now).getFullYear()
 
 		return { year }
 	}

@@ -1,0 +1,9 @@
+{
+	home {
+		seo: _seoMetaTags {
+			tag
+			content
+			attributes
+		}
+	}
+}

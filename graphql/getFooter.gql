@@ -1,0 +1,15 @@
+{
+	footer {
+		logo {
+			value
+		}
+		description {
+			value
+		}
+		social {
+			id
+			icon
+			link
+		}
+	}
+}

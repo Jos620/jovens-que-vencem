@@ -28,36 +28,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import imageFields from '~/queries/getImageFields'
+import iigd from '~/graphql/getAbout'
 
 export default {
 	apollo: {
-		iigd: gql`
-			{
-				iigd {
-					title {
-						value
-					}
-					description {
-						value
-					}
-					link
-					imageOne {
-						responsiveImage {
-							...imageFields
-						}
-					}
-					imageTwo {
-						responsiveImage {
-							...imageFields
-						}
-					}
-				}
-			}
-
-			${imageFields}
-		`
+		iigd
 	},
 
 	mounted() {

@@ -49,32 +49,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import imageFields from '~/queries/getImageFields'
+import verse from '~/graphql/getVerse'
 
 export default {
 	apollo: {
-		verse: gql`
-			{
-				verse {
-					image {
-						responsiveImage {
-							...imageFields
-						}
-					}
-					title {
-						value
-					}
-					content {
-						value
-					}
-					reference
-					link
-				}
-			}
-
-			${imageFields}
-		`
+		verse
 	}
 }
 </script>

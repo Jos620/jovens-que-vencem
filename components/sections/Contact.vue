@@ -38,25 +38,13 @@
 
 <script>
 import { defineComponent } from '@nuxtjs/composition-api'
-import gql from 'graphql-tag'
+import contact from '~/graphql/getContact'
 import useTelephoneMask from '~/composables/useTelephoneMask'
 import useSubmitTelephone from '~/composables/useSubmitTelephone'
 
 export default defineComponent({
 	apollo: {
-		contact: gql`
-			{
-				contact {
-					title {
-						value
-					}
-					description {
-						value
-					}
-					placeholder
-				}
-			}
-		`
+		contact
 	},
 
 	setup() {

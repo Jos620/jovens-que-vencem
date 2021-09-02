@@ -31,28 +31,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
-import imageFields from '~/queries/getImageFields'
+import card from '~/graphql/getHomeCard'
 
 export default {
 	apollo: {
-		card: gql`
-			{
-				card {
-					title {
-						value
-					}
-					link
-					thumbnail {
-						responsiveImage {
-							...imageFields
-						}
-					}
-				}
-			}
-
-			${imageFields}
-		`
+		card
 	}
 }
 </script>

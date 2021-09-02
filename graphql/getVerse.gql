@@ -1,0 +1,19 @@
+#import './getImageFields.gql'
+
+{
+	verse {
+		image {
+			responsiveImage {
+				...imageFields
+			}
+		}
+		title {
+			value
+		}
+		content {
+			value
+		}
+		reference
+		link
+	}
+}
