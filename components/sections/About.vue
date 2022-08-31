@@ -34,10 +34,6 @@ export default {
 	apollo: {
 		iigd
 	},
-
-	mounted() {
-		console.log(this.iigd)
-	}
 }
 </script>
 
